@@ -1,0 +1,39 @@
+h1{
+    display: flex;
+    text-align: center;
+    font-size: 90px;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.web-info-container{
+    margin: 20px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 95%;
+}
+
+.web-info{
+    margin: 20px;
+    justify-content: baseline;
+    font-size: 18px;
+    line-height: 40px;
+    text-align: justify;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+a{
+    color: #6495ed;
+}

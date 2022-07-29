@@ -1,0 +1,97 @@
+<div class="container">
+    <form (ngSubmit)="register()">
+        <mat-card class="card">
+        <form (ngSubmit)="register()" [formGroup]="registerForm">
+            <mat-card-header>
+                <mat-card-title>SignUp</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="login-container">
+                    <div class="login-fields">
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Username</mat-label>
+                            <input type="text" matInput [formControl]="usernameInput" placeholder="Username...">
+                            <mat-error *ngIf="usernameInput.hasError('required') && usernameInput.touched">
+                              Username is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="usernameInput.hasError('usernameExist') && usernameInput.touched">
+                              This username already exists
+                            </mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field class="half-left" appearance="fill">
+                            <mat-label>Password</mat-label>
+                            <input type="password" matInput formControlName="password" placeholder="Password...">
+                            <mat-error *ngIf="passwordInput.hasError('required') && passwordInput.touched">
+                              Password is <strong>required</strong>
+                            </mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field class="half-right" appearance="fill">
+                            <mat-label>Password Confirmation</mat-label>
+                            <input type="password" matInput formControlName="passwordConfirmation" placeholder="Password Confirmation...">
+                            <mat-error *ngIf="registerForm.hasError('passwordMatch') && passwordInput.valid && 
+                              passwordConfirmationInput.touched">
+                                Passwords do not match
+                            </mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field class="half-left" appearance="fill">
+                            <mat-label>First Name</mat-label>
+                            <input type="text" matInput formControlName="firstName" placeholder="First Name...">
+                            <mat-error *ngIf="firstNameInput.hasError('required') && firstNameInput.touched">
+                              First Name is <strong>required</strong>
+                            </mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field class="half-right" appearance="fill">
+                            <mat-label>Last Name</mat-label>
+                            <input type="text" matInput formControlName="lastName" placeholder="Last Name...">
+                            <mat-error *ngIf="lastNameInput.hasError('required') && lastNameInput.touched">
+                              Last Name is <strong>required</strong>
+                            </mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input type="email" matInput formControlName="email" placeholder="Email...">
+                            <mat-error *ngIf="emailInput.hasError('required') && emailInput.touched">
+                              Email is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="emailInput.hasError('email') && emailInput.touched">
+                                Please introduce a valid email
+                            </mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field class="half-left" appearance="fill">
+                            <mat-label>Birth Date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="birthDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error class="error-msg" *ngIf="birthDateInput.hasError('required') && birthDateInput.touched">
+                                Birth Date is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="half-right" appearance="fill">
+                          <mat-label>Profile Picture URL</mat-label>
+                          <input type="text" matInput formControlName="profilePicture" placeholder="Profile Picture URL...">
+                        </mat-form-field>
+
+                        <button type="submit" mat-raised-button color="accent" class="full-width" [disabled]="registerForm.invalid">
+                          SIGNUP
+                        </button>
+                    </div>
+                    <div>
+                        <img src="../../../assets/images/logo.png" alt="" class="logo-img" width=" 200px">
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <h4 class="register-text">Already have an account? <a [routerLink]="['/login']">Login</a></h4>
+            </mat-card-actions>
+        </form>
+        </mat-card>
+    </form>
+</div>

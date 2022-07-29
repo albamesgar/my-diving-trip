@@ -1,0 +1,19 @@
+<div>
+    <app-nav-bar></app-nav-bar>
+</div>
+
+<div class="container">
+  <div class="title">
+    <h2>Diving Log Book</h2> 
+    <img src="../../../../assets/images/dive.png" height="90px">
+  </div>
+
+<button mat-raised-button color="accent" (click)="openNewDiveDialog()">Add new dive</button>
+
+<div class="dive-component__cards">
+    <div *ngFor="let dive of dives, let i=index" >
+      <app-dive-card [dive]="dive" [index]="i" [dives]="dives"></app-dive-card>
+    </div>
+  </div>
+
+</div>

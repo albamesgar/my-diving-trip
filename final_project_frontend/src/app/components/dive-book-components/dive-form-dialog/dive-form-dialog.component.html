@@ -1,0 +1,232 @@
+<mat-card-header  style="text-align: center;">
+    <mat-card-title>{{title}}</mat-card-title>
+</mat-card-header>
+<!-- <div class="imgcontainer">
+<img src="../../../assets/vinilos/viniloBuzo.jpg" alt="Avatar" class="avatar">
+</div> -->
+  
+<div class="container">
+    <form (ngSubmit)="onSubmit(); diveForm.markAsUntouched()" [formGroup]="diveForm">
+        <div mat-dialog-content>
+            <div class="first-row">
+            <span>
+                <mat-form-field appearance="fill">
+                    <mat-label>Dive Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error class="error-msg" *ngIf="dateInput.hasError('required') && dateInput.touched">
+                        Dive Date is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span>
+                <mat-form-field appearance="fill">
+                    <mat-label>Location</mat-label>
+                    <input type="text" matInput formControlName="location">
+                    <mat-error class="error-msg" *ngIf="locationInput.hasError('required') && locationInput.touched">
+                        Location is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span>
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-label>Maximum Depth</mat-label>
+                    <input type="number" matInput formControlName="maxDepth" class="right-align" placeholder="0">
+                    <span matSuffix class="matSuffix">m&nbsp;</span>
+                    <mat-error class="error-msg" *ngIf="maxDepthInput.hasError('required') && maxDepthInput.touched">
+                        Maximum Depth is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span>
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-label>Minutes Diving</mat-label>
+                    <input type="number" matInput formControlName="minutesIn" class="right-align" placeholder="0">
+                    <span matSuffix class="matSuffix">min&nbsp;</span>
+                    <mat-error class="error-msg" *ngIf="minutesInInput.hasError('required') && minutesInInput.touched">
+                        The number of Minutes Diving is <strong>required</strong>
+                    </mat-error>
+                    <mat-error class="error-msg" *ngIf="minutesInInput.hasError('min') && minutesInInput.touched">
+                        This value can <strong>NOT</strong> be negative
+                    </mat-error>
+                </mat-form-field>
+            </span>
+            </div>
+
+            <div class="cards-row">
+            <span class="block">
+            <mat-card-header class="card-header">
+                <b>Partner</b>
+            </mat-card-header><br>
+            <mat-card-content class="block-info">
+                    <span>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Name</mat-label>
+                            <input type="text" matInput formControlName="partnerName">
+                            <mat-error class="error-msg" *ngIf="partnerNameInput.hasError('required') && partnerNameInput.touched">
+                                Partner Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </span>
+                    <span class="info-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Titulation</mat-label>
+                            <input type="text" matInput formControlName="partnerTitulation">
+                            <mat-error class="error-msg" *ngIf="partnerTitulationInput.hasError('required') && 
+                                partnerTitulationInput.touched">
+                                Partner Titulation is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </span>
+            </mat-card-content>
+            </span>
+
+            <span class="block">
+            <mat-card-header class="card-header">
+                <b>Air Pressure</b>
+            </mat-card-header><br>
+            <mat-card-content class="block-info">
+                    <span>
+                        <mat-form-field appearance="fill" floatLabel="always">
+                            <mat-label>Start</mat-label>
+                            <input type="number" matInput formControlName="airEntering" class="right-align" placeholder="0">
+                            <span matSuffix class="matSuffix">bar&nbsp;</span>
+                            <mat-error class="error-msg" *ngIf="airEnteringInput.hasError('min') && airEnteringInput.touched">
+                                This value can <strong>NOT</strong> be negative
+                            </mat-error>
+                        </mat-form-field>
+                    </span>
+                    <span class="info-group">
+                        <mat-form-field appearance="fill" floatLabel="always">
+                            <mat-label>End</mat-label>
+                            <input type="number" matInput formControlName="airOutgoing" class="right-align" placeholder="0">
+                            <span matSuffix class="matSuffix">bar&nbsp;</span>
+                            <mat-error class="error-msg" *ngIf="airOutgoingInput.hasError('min') && airOutgoingInput.touched">
+                                This value can <strong>NOT</strong> be negative
+                            </mat-error>
+                        </mat-form-field>
+                    </span>
+            </mat-card-content>
+            </span>
+            </div>
+
+            <div class="third-row">
+            <span>
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-label>Temperature</mat-label>
+                    <input type="number" matInput formControlName="temperature" class="right-align" placeholder="0">
+                    <span matSuffix class="matSuffix">ºC&nbsp;</span>
+                </mat-form-field>
+            </span>
+
+            <span>
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-label>Visibility</mat-label>
+                    <input type="number" matInput formControlName="visibility" class="right-align" placeholder="0">
+                    <span matSuffix class="matSuffix">m&nbsp;</span>
+                    <mat-error class="error-msg" *ngIf="visibilityInput.hasError('min') && visibilityInput.touched">
+                        This value can <strong>NOT</strong> be negative
+                    </mat-error>
+                </mat-form-field>
+            </span>
+
+            <span>
+                <mat-form-field appearance="fill">
+                        <mat-label>Club Name</mat-label>
+                        <mat-select [formControl]="clubNameInput">
+                            <mat-option *ngFor="let club of clubs" [value]="club">{{club.name}}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </span>
+
+            <span>
+                <mat-form-field appearance="fill">
+                    <mat-label>Picture URL</mat-label>
+                    <input type="text" matInput formControlName="picture">
+                </mat-form-field>
+            </span>
+        </div>
+
+            <div>
+                <label id="bottleCapacity-lab"><b>Bottle Capacity </b></label>
+                <mat-radio-group
+                    aria-labelledby="bottleCapacity-label"
+                    formControlName="bottleCapacity">
+                    <mat-radio-button *ngFor="let bottle of bottles" value="{{bottle}}" color="primary">
+                        {{bottle}}
+                    </mat-radio-button>
+                    <span>
+                        <mat-form-field appearance="fill" *ngIf="bottleCapacityInput.value !== '12L' && bottleCapacityInput.value !== '15L'
+                        && bottleCapacityInput.value !== '18L' && bottleCapacityInput.value !== ''">
+                            <mat-label>Bottle Capacity</mat-label>
+                            <input type="text" matInput formControlName="bottleCapacity">
+                        </mat-form-field>
+                    </span>
+                </mat-radio-group>
+            </div>
+
+            <div>
+                <span>
+                    <label id="airType-lab"><b>Gas used </b></label>
+                    <mat-radio-group
+                        aria-labelledby="airType-label"
+                        formControlName="airType">
+                        <mat-radio-button *ngFor="let gas of gases" value="{{gas}}" color="primary">
+                            {{gas}}
+                        </mat-radio-button>
+                        <span>
+                            <mat-form-field appearance="fill" *ngIf="airTypeInput.value !== 'Air' && airTypeInput.value !== 'NITROX'
+                            && airTypeInput.value !== ''">
+                                <mat-label>Gas used</mat-label>
+                                <input type="text" matInput formControlName="airType">
+                            </mat-form-field>
+                        </span>
+                        <span>
+                            <mat-form-field appearance="fill" *ngIf="airTypeInput.value === 'NITROX' || airTypeInput.value === 'Other'" 
+                                floatLabel="always">
+                                <mat-label>Oxygen Proportion</mat-label>
+                                <input type="number" matInput formControlName="oxygenProportion" class="right-align" placeholder="0">
+                                <span matSuffix class="matSuffix">%&nbsp;</span>
+                                <mat-error class="error-msg" *ngIf="oxygenProportionInput.hasError('min') && oxygenProportionInput.touched">
+                                    This value can <strong>NOT</strong> be negative
+                                </mat-error>
+                            </mat-form-field>
+                        </span>
+                    </mat-radio-group>
+                </span>
+            </div>
+        
+            <span>
+                <mat-form-field appearance="fill"  class="observations">
+                    <mat-label>Observations</mat-label>
+                    <textarea matInput formControlName="observations"></textarea>
+                </mat-form-field>
+            </span>
+
+        <div class="rating">
+            <label for="rating"><b>Rating</b></label><br>
+            <div name="rating">
+                <span class="star-rating">
+                    <input type="radio" name="rating" value="1" formControlName="rating"><i></i>
+                    <input type="radio" name="rating" value="2" formControlName="rating"><i></i>
+                    <input type="radio" name="rating" value="3" formControlName="rating"><i></i>
+                    <input type="radio" name="rating" value="4" formControlName="rating"><i></i>
+                    <input type="radio" name="rating" value="5" formControlName="rating"><i></i>
+                </span>
+            </div>
+        </div>
+
+        </div>
+        <div mat-dialog-actions>
+            <button mat-raised-button color="warn" class="close" type="reset" (click)="onNoClick()">Close</button>
+            <button mat-raised-button color="accent" class="send" *ngIf="data.dive === null " [disabled]="diveForm.invalid" 
+            [mat-dialog-close]="data.dives" (click)="onSubmit(); diveForm.markAsUntouched()">Submit</button>
+            <button mat-raised-button type="button" color="accent" class="send" *ngIf="data.dive !== null " [disabled]="diveForm.invalid" 
+            (click)="modify(); diveForm.markAsUntouched()">Modify</button>
+        </div>
+    </form>
+</div>

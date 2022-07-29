@@ -1,0 +1,34 @@
+button:hover {
+    opacity: 0.8;
+  }
+
+  .mat-dialog-content{
+    margin-top: 15px;
+}
+
+span{
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+button.send:enabled:hover{
+  background-color: #619761;
+}
+
+button.close:hover{
+  background-color: #a21111;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-right{
+  width: 48%;
+  float: right;
+}
+
+.half-left{
+  width: 48%;
+  float: left;
+}

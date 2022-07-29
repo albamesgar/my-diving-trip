@@ -1,0 +1,44 @@
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+  }
+  
+  img.avatar {
+    max-width: 70%;
+    max-height: 20%;
+    border-radius: 5%;
+  }
+
+  .dive-card-component__name{
+    font-size: 20px;
+    /* margin: 5px; */
+  }
+
+  .dive-info{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+  }
+
+.observations{
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.validation{
+  width: 20%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+  button.prim:hover{
+    background-color: #5282e8;
+  }
+
+  button.close:hover{
+    background-color:rgb(230, 230, 230);
+  }

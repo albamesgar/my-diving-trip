@@ -1,0 +1,38 @@
+/*Title component*/
+.club-component__cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 6px;
+    margin-left: 30px;
+    margin-right: auto;
+    font-size: 15px;
+  }
+
+  h2{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 20px;
+    margin-right: 20px;
+}
+
+.container{
+  width: 80vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  /* background-color: antiquewhite; */
+  /* height: 100vh; */
+}
+
+.title{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.image{
+  border-radius: 7%;
+  height: 80px;
+}

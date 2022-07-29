@@ -1,0 +1,28 @@
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+  }
+  
+  img.avatar {
+    max-width: 20%;
+    max-height: 20%;
+    border-radius: 10%;
+  }
+
+  span{
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  button.send:enabled:hover{
+    background-color: #619761;
+  }
+  
+  button.close:hover{
+    background-color: #a21111;
+  }
+
+  .mat-form-field{
+    width: 30%;
+  }

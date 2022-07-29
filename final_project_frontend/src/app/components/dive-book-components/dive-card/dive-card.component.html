@@ -1,0 +1,15 @@
+<div class="dive-card-component">
+    <div class="dive-card-component__name">
+        #{{index +1}}
+    </div>
+    <img class="dive-card-component__image" [src]="dive.picture" alt="Photo of {{dive.id}}">
+    <div class="dive-card-component__info-entrenador">
+        <ul>
+            <li><b>Date</b>: {{dive.date}}</li>
+            <li><b>Location</b>: {{dive.location}}</li>
+        </ul>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="openShowDialog()">Show More</button>
+    </div>
+</div>

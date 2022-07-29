@@ -1,0 +1,15 @@
+<div>
+    <app-nav-bar></app-nav-bar>
+</div>
+
+<div class="container">
+  <div class="title">
+    <h2>Clubs Information</h2>
+    <img src="../../../../assets/images/flag.png" class="image">
+  </div>
+  <div class="club-component__cards">
+      <div *ngFor="let club of clubs, let i=index" >
+        <app-club-card [club]="club" [index]="i"></app-club-card>
+      </div>
+    </div>
+</div>

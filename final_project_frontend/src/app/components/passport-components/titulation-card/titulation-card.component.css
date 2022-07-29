@@ -1,0 +1,53 @@
+.title-card-component {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  
+    width: 300px;
+    height: 200px;
+    margin: 20px;
+    padding-top: 5px;
+    border: 1px solid rgb(171, 171, 171);
+    border-radius: 2%;
+    transition: all;
+    transition-duration: 300ms;
+    background-color:white;
+  }
+  
+  .title-card-component:hover {
+    box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+  }
+  
+  .title-card-component__image {
+    height: 200px;
+  }
+  
+  .title-card-component__name{
+    font-size: 20px;
+    margin: 5px;
+  }
+  
+  .title-card-component__close{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    outline: none;
+    text-decoration:none;
+    border: none;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 99999px;
+    cursor: pointer;
+  }
+  
+  .title-card-component__close:hover{
+    background-color: rgb(39, 39, 39);
+    color: white;
+  }
+
+  li{
+    margin: 10px 0;
+  }

@@ -1,0 +1,18 @@
+<div>
+<app-nav-bar></app-nav-bar>
+</div>
+
+<div class="container">
+  <div class="title">
+    <h2>Diving Passport</h2>
+    <img src="../../../../assets/images/title.png" height="80px">
+  </div>
+  <button mat-raised-button color="accent" (click)="openNewTitleDialog()">Add new titulation</button>
+
+  <div class="title-component__cards">
+    <div *ngFor="let titulation of titulations, let i=index" >
+      <app-titulation-card [titulation]="titulation" [index]="i"></app-titulation-card>
+    </div>
+  </div>
+
+</div>

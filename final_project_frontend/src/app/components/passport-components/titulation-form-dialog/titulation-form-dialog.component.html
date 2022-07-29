@@ -1,0 +1,83 @@
+<mat-card-header  style="text-align: center;">
+    <mat-card-title>Add new Titulation</mat-card-title>
+</mat-card-header>
+    <div class="imgcontainer">
+        <img src="https://tse2.mm.bing.net/th?id=OIP.ZtEtdn1rkh6W-pQ9tQsfegHaHa&pid=Api" alt="Avatar" class="avatar">
+        <!-- <img src="../../../../assets/images/viniloBuzo.jpg" alt="Avatar" class="avatar"> -->
+    </div>
+
+    <div class="container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="titulationForm">
+        <div mat-dialog-content>
+        <span>
+        <mat-form-field appearance="fill">
+            <mat-label>Diving Organization</mat-label>
+            <mat-select formControlName="organization">
+                <mat-option *ngFor="let organization of organizations" [value]="organization">{{organization}}</mat-option>
+            </mat-select>
+            <mat-error class="error-msg" *ngIf="organizationInput.hasError('required') && organizationInput.touched">
+                Diving Organization is <strong>required</strong>
+            </mat-error>
+            </mat-form-field>
+            <span>
+                <mat-form-field appearance="fill" *ngIf="organizationInput.value !== '' && organizationInput.value !== 'FEDAS'
+                && organizationInput.value !== 'PADI' && organizationInput.value !== 'CEMAS' && organizationInput.value !== 'SSI'">
+                    <mat-label>Diving Organization</mat-label>
+                    <input type="text" matInput formControlName="organization">
+                </mat-form-field>
+            </span>
+        </span>
+        <span>
+            <mat-form-field appearance="fill">
+                <mat-label>Title Name</mat-label>
+                <input type="text" matInput placeholder="Ex. 2**" formControlName="titleName">
+                <mat-error class="error-msg" *ngIf="titleNameInput.hasError('required') && titleNameInput.touched">
+                    Title name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </span>
+
+        <span>
+            <mat-form-field appearance="fill">
+                <mat-label>Obtained at Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dateObtained">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error class="error-msg" *ngIf="dateObtainedInput.hasError('required') && dateObtainedInput.touched">
+                    Obtained Date is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </span>
+
+        <span>
+            <mat-form-field appearance="fill">
+                <mat-label>Instructor Name</mat-label>
+                <input type="text" matInput formControlName="instructorName">
+                <mat-error class="error-msg" *ngIf="instructorNameInput.hasError('required') && instructorNameInput.touched">
+                    Instructor name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </span>
+        <span>
+            <mat-form-field appearance="fill">
+                <mat-label>Club Name</mat-label>
+
+                <mat-select [formControl]="clubNameInput">
+                    <mat-option *ngFor="let club of clubs" [value]="club">{{club.name}}</mat-option>
+                </mat-select>
+
+                <mat-error class="error-msg" *ngIf="clubNameInput.hasError('required') && clubNameInput.touched">
+                    Club name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </span>
+
+    </div>
+        <div mat-dialog-actions>
+            <button mat-raised-button color="warn" class="close" type="reset" (click)="onNoClick()">Close</button>
+            <button mat-raised-button color="accent" class="send" [disabled]="titulationForm.invalid" [mat-dialog-close]="data.titulations" 
+            (click)="onSubmit(); titulationForm.markAsUntouched()">Submit</button>
+        </div>
+    </form>
+</div>
+
