@@ -33,16 +33,6 @@ public class EdgeControllerImpl implements EdgeController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private DivingBookClient bookClient;
-    @Autowired
-    private DivingPassportClient passportClient;
-    @Autowired
-    private DivingClubClient clubClient;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private EdgeService edgeService;
 
     //Users
@@ -86,7 +76,7 @@ public class EdgeControllerImpl implements EdgeController {
     @GetMapping("/dive-books/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public DiveBook getDiveBook(@PathVariable Long userId) {
-        return bookClient.getDiveBook(userId);
+        return edgeService.getDiveBook(userId);
     }
 
     @PostMapping("/add-dive/dive-book/{userId}")
@@ -98,7 +88,7 @@ public class EdgeControllerImpl implements EdgeController {
     @PutMapping("/modify-dive/{diveId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void modifyDiveToDiveBook(@PathVariable Long diveId, @RequestBody DiveDTO diveDTO) {
-        bookClient.modifyDiveToDiveBook(diveId,diveDTO);
+        edgeService.modifyDiveToDiveBook(diveId,diveDTO);
     }
 
     @GetMapping("/dive/{id}/validate")
@@ -117,48 +107,48 @@ public class EdgeControllerImpl implements EdgeController {
     @GetMapping("/passports/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public Passport getPassport(@PathVariable Long userId) {
-        return passportClient.getPassport(userId);
+        return edgeService.getPassport(userId);
     }
 
     @PostMapping("/add-titulation/passport/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
     public Titulation addTitulation(@PathVariable Long userId, @RequestBody TitulationDTO titulationDTO) {
-        return passportClient.addTitulation(userId,titulationDTO);
+        return edgeService.addTitulation(userId,titulationDTO);
     }
 
     @PutMapping("/modify-titulation/{titulationId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void modifyTitulation(@PathVariable Long titulationId, @RequestBody TitulationDTO titulationDTO) {
-        passportClient.modifyTitulation(titulationId,titulationDTO);
+        edgeService.modifyTitulation(titulationId,titulationDTO);
     }
 
     //Club
     @GetMapping("/clubs")
     @ResponseStatus(HttpStatus.OK)
     public List<Club> getAllClubs(){
-        return clubClient.getAllClubs();
+        return edgeService.getAllClubs();
     }
     @GetMapping("/clubs/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Club getClub(@PathVariable Long id) {
-        return clubClient.getClub(id);
+        return edgeService.getClub(id);
     }
 
     @PostMapping("/clubs")
     @ResponseStatus(HttpStatus.CREATED)
     public Club createClub(@RequestBody Club club) {
-        return clubClient.createClub(club);
+        return edgeService.createClub(club);
     }
 
     @PutMapping("/clubs/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void modifyClub(@PathVariable Long id, @RequestBody Club club) {
-        clubClient.modifyClub(id, club);
+        edgeService.modifyClub(id, club);
     }
 
     @DeleteMapping("/clubs/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteClub(@PathVariable Long id) {
-        clubClient.deleteClub(id);
+        edgeService.deleteClub(id);
     }
 }
