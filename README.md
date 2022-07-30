@@ -66,6 +66,21 @@ https://github.com/albamesgar/my-diving-trip.git
 
 * "clubs"
 
+Run the following code in the "users" database to create the principal roles:
+
+```
+CREATE TABLE role (
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO role (name) VALUES
+("ADMIN"),
+("DIVER"),
+("CLUB");
+```
+
 
 3. Set Up & Run The Microservices - (Best Running Order - > Eureka, Edge, Diving Book, Diving Passport, Diving Clubs). Enter the following into terminal:
 ```
