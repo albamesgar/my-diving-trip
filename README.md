@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/106671685/181802007-421b224e-2cda-4904-bb0b-ed44f0ac9a16.png">
+  <img src="./Readme-Images/logo.png">
 </p>
 
 # Final Project - Alba Mesa
@@ -126,7 +126,25 @@ mvn spring-boot:run
 ## Images
 
 ### Class Diagram
+<img src="./Readme-Images/Class Diagram.png">
 
 ### Use Case Diagram
+<img src="./Readme-Images/Use Case Diagram.png">
 
 ### Microservices Diagram
+<img src="./Readme-Images/Microservices Diagram.png">
+
+## Next Steps
+Finally, I would like to point out some of the future steps of this project:
+
+* Create a clubs view in the frontend to register new clubs and modify their contact information
+
+* Implement the clubs rating as a mean of the ratings of the dives done with each club
+
+* Create an admin view in the frontend
+
+* Optimize the frontend
+
+* Optimize the security of the full API
+
+* Contact diving clubs to poblate de Clubs Data Base
