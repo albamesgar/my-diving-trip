@@ -56,7 +56,7 @@ You can find the last version of the code in the following URL -> https://github
 https://github.com/albamesgar/my-diving-trip.git
 ```
 
-2. Create the following mySQL databases at the standard localhost port 3306
+2. Create a mySQL database with the following schemas at the standard localhost port 3306
 
 * "users"
 
@@ -66,6 +66,32 @@ https://github.com/albamesgar/my-diving-trip.git
 
 * "clubs"
 
+Run the following code in the "users" schema to create the principal roles:
+
+```
+CREATE TABLE role (
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO role (name) VALUES
+("ADMIN"),
+("DIVER"),
+("CLUB");
+```
+
+To run the back-end tests create the following schemas:
+
+* "users_test"
+
+* "diving_log_test"
+
+* "passport_test"
+
+* "clubs_test"
+
+You can change the username and the password of the database specified in each application.properties file in case yours are different to the current ones.
 
 3. Set Up & Run The Microservices - (Best Running Order - > Eureka, Edge, Diving Book, Diving Passport, Diving Clubs). Enter the following into terminal:
 ```
