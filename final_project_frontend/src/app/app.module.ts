@@ -33,6 +33,7 @@ import { DeleteUserDialogComponent } from './components/user-components/delete-u
 import { ClubsPageComponent } from './components/club-components/clubs-page/clubs-page.component';
 import { ClubCardComponent } from './components/club-components/club-card/club-card.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     DeleteUserDialogComponent,
     DiveFormDialogComponent,
     ClubsPageComponent,
-    ClubCardComponent
+    ClubCardComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

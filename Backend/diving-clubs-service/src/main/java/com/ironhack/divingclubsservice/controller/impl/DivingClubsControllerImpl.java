@@ -3,6 +3,7 @@ package com.ironhack.divingclubsservice.controller.impl;
 import com.ironhack.divingclubsservice.controller.interfaces.DivingClubsController;
 import com.ironhack.divingclubsservice.model.Club;
 import com.ironhack.divingclubsservice.repository.ClubRepository;
+import com.ironhack.divingclubsservice.service.interfaces.DivingClubsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ import java.util.List;
 public class DivingClubsControllerImpl implements DivingClubsController {
     @Autowired
     private ClubRepository clubRepository;
+    @Autowired
+    private DivingClubsService divingClubsService;
 
     @GetMapping("/clubs")
     @ResponseStatus(HttpStatus.OK)
@@ -24,18 +27,8 @@ public class DivingClubsControllerImpl implements DivingClubsController {
     @GetMapping("/clubs/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Club getClub(@PathVariable Long id) {
-        Club club = clubRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Club not found"));
-        return club;
+        return divingClubsService.getClub(id);
     }
-
-//    @GetMapping("/clubs/{name}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public Club getClubByName(@PathVariable String name) {
-//        Club club = clubRepository.findClubByName(name).orElseThrow(() ->
-//                new ResponseStatusException(HttpStatus.NOT_FOUND, "Club not found"));
-//        return club;
-//    }
 
     @PostMapping("/create/club")
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,17 +39,12 @@ public class DivingClubsControllerImpl implements DivingClubsController {
     @PutMapping("/modify-club/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void modifyClub(@PathVariable Long id, @RequestBody Club club) {
-        Club originalClub = clubRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Club not found"));
-        club.setId(id);
-        clubRepository.save(club);
+        divingClubsService.modifyClub(id, club);
     }
 
     @DeleteMapping("/delete/club/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteClub(@PathVariable Long id) {
-        Club club = clubRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Club not found"));
-        clubRepository.delete(club);
+        divingClubsService.deleteClub(id);
     }
 }

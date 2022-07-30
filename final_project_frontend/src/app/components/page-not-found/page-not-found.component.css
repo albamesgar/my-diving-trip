@@ -1,0 +1,35 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+.error_404{
+    margin: 20px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 95%;
+}
+
+.error_message{
+    margin: 20px;
+    justify-content: baseline;
+    font-size: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.mat-raised-button{
+    font-size: 30px;
+    height: 40px;
+}
+.mat-raised-button:hover {
+    background-color: #5282e8;
+  }

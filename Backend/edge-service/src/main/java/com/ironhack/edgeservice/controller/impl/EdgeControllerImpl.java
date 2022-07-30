@@ -9,6 +9,7 @@ import com.ironhack.edgeservice.model.*;
 import com.ironhack.edgeservice.repository.RoleRepository;
 import com.ironhack.edgeservice.repository.UserRepository;
 import com.ironhack.edgeservice.security.CustomUserDetails;
+import com.ironhack.edgeservice.service.interfaces.EdgeService;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -39,18 +40,16 @@ public class EdgeControllerImpl implements EdgeController {
     private DivingPassportClient passportClient;
     @Autowired
     private DivingClubClient clubClient;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private EdgeService edgeService;
 
     //Users
     @GetMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO getUser(@PathVariable Long id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-        user.setPassword(null);
-        return userToDTO(user);
+        return edgeService.getUser(id);
     }
 
     @GetMapping("/users/usernames")
@@ -62,61 +61,25 @@ public class EdgeControllerImpl implements EdgeController {
     @GetMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public User loginUser(@AuthenticationPrincipal User user) {
-        log.info("Ha entrado");
-        User user1 = userRepository.findUserByUsernameAndPassword(user.getUsername(), user.getPassword())
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-        log.info("Login successful");
-        user1.setPassword(null); // NEVER RETURN PASSWORD
-        return user1;
+        return edgeService.loginUser(user);
     }
 
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO registerUser(@RequestBody UserDTO userDTO) {
-        User user = dtoToModel(userDTO);
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-
-        //Set default profile
-        User savedUser = userRepository.save(user);
-
-        //Create Diving Book and Passport associated with this user
-        bookClient.createDiveBook(new DiveBook(savedUser.getId()));
-        passportClient.createPassport(new Passport(savedUser.getId()));
-
-        savedUser.setPassword(null);
-        return userToDTO(savedUser);
+        return edgeService.registerUser(userDTO);
     }
 
     @PutMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public User modifyUser(@PathVariable Long userId, @RequestBody UserDTO userDTO){
-        User originalUser = userRepository.findById(userId).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-
-        User user = dtoToModel(userDTO);
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setId(userId);
-
-        //Set default profile
-//        user.setRole(new Role("DIVER"));
-        User savedUser = userRepository.save(user);
-        savedUser.setPassword(null);
-        return savedUser;
+        return edgeService.modifyUser(userId,userDTO);
     }
 
     @DeleteMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable Long id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-
-        //Delete Diving Book and Passport associated with this user
-        bookClient.deleteDiveBook(id);
-        passportClient.deletePassport(id);
-
-        //Delete user
-        userRepository.delete(user);
+        edgeService.deleteUser(id);
     }
 
     //Dive Book
@@ -129,33 +92,7 @@ public class EdgeControllerImpl implements EdgeController {
     @PostMapping("/add-dive/dive-book/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
     public Dive addDiveToDiveBook(@PathVariable Long userId, @RequestBody DiveDTO diveDTO) throws IOException {
-        User user = userRepository.findById(userId).orElseThrow( () ->
-            new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
-        Dive dive =  bookClient.addDiveToDiveBook(userId,diveDTO);
-        String clubEmail = clubClient.getClub(dive.getClubId()).getEmail();
-
-        SendGrid sg = new SendGrid("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");
-        Request request = new Request();
-
-        String body = "{\"from\":{\"email\":\"my.diving.trip@workmail.com\"}," +
-                "\"personalizations\":[{\"to\":[{\"email\":\""+clubEmail+"\"}]," +
-                "\"dynamic_template_data\":{\"date\":\""+dive.getDate().toString()+"\",\"diveId\":\""
-                +dive.getId().toString()+"\", \"firstName\":\""+ user.getFirstName()+"\",\"lastName\":\""+
-                user.getLastName()+"\"}}],\"template_id\":" +
-                "\"d-54ce21c55e5b4cfd95eecba2a0880346\"}";
-
-        try {
-            request.setMethod(Method.POST);
-            request.setEndpoint("/mail/send");
-            request.setBody(body);
-            Response response = sg.api(request);
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-            System.out.println(response.getHeaders());
-        } catch (IOException ex) {
-            throw ex;
-        }
-        return dive;
+        return edgeService.addDiveToDiveBook(userId, diveDTO);
     }
 
     @PutMapping("/modify-dive/{diveId}")
@@ -167,17 +104,13 @@ public class EdgeControllerImpl implements EdgeController {
     @GetMapping("/dive/{id}/validate")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public String validateDive(@PathVariable Long id){
-        DiveConfirmationDTO diveConfirmationDTO = new DiveConfirmationDTO(true);
-        bookClient.changeConfirmation(id, diveConfirmationDTO);
-        return "The dive has been validated. Thanks for your time :)";
+        return edgeService.validateDive(id);
     }
 
     @GetMapping("/dive/{id}/cancel")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public String cancelDiveValidation(@PathVariable Long id){
-        DiveConfirmationDTO diveConfirmationDTO = new DiveConfirmationDTO(false);
-        bookClient.changeConfirmation(id, diveConfirmationDTO);
-        return "The dive has not been validated :(";
+        return edgeService.cancelDiveValidation(id);
     }
 
     //Passport
@@ -227,35 +160,5 @@ public class EdgeControllerImpl implements EdgeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteClub(@PathVariable Long id) {
         clubClient.deleteClub(id);
-    }
-
-    private UserDTO userToDTO(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUsername(user.getUsername());
-        userDTO.setPassword(user.getPassword());
-        userDTO.setFirstName(user.getFirstName());
-        userDTO.setLastName(user.getLastName());
-        userDTO.setBirthDate(user.getBirthDate());
-        userDTO.setProfilePicture(user.getProfilePicture());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setRole(user.getRole().getName());
-
-        return userDTO;
-    }
-
-    private User dtoToModel(UserDTO userDTO) {
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setBirthDate(userDTO.getBirthDate());
-        user.setEmail(userDTO.getEmail());
-        user.setProfilePicture(userDTO.getProfilePicture());
-        Role role = roleRepository.findRoleByName(userDTO.getRole()).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Role doesn't exist"));
-        user.setRole(role);
-
-        return user;
     }
 }

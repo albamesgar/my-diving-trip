@@ -9,6 +9,7 @@ import { RegisterComponent } from './components/initial-page-components/register
 import { UserPageComponent } from './components/user-components/user-page/user-page.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ClubsPageComponent } from './components/club-components/clubs-page/clubs-page.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
     path: 'clubs',
     component: ClubsPageComponent
   },
+  {
+    path:'**',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({
