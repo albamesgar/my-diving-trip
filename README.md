@@ -10,6 +10,7 @@
 2. [**Getting started**](#Getting-started)
 3. [**API Routes**](#API-routes)
 4. [**Images**](#Images)
+5. [**Next Steps**](#Next-Steps)
 
 <a name="About"></a>
 ## About
@@ -134,6 +135,7 @@ mvn spring-boot:run
 ### Microservices Diagram
 <img src="./Readme-Images/Microservices Diagram.png">
 
+<a name="Next-Steps"></a>
 ## Next Steps
 Finally, I would like to point out some of the future steps of this project:
 
