@@ -224,4 +224,65 @@ public class EdgeServiceImpl implements EdgeService {
 
         return user;
     }
+
+    //Fallback methods
+    public UserDTO registerUserFallback(UserDTO userDTO, Exception e) {
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public void deleteUserFallback(Long id, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public DiveBook getDiveBookFallback(Long userId, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public Dive addDiveToDiveBook(Long userId, DiveDTO diveDTO, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public void modifyDiveToDiveBook(Long diveId, DiveDTO diveDTO, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public String validateDive(Long id, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public String cancelDiveValidation(Long id, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public Passport getPassport(Long userId, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public Titulation addTitulation(Long userId, TitulationDTO titulationDTO, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public void modifyTitulation(Long titulationId, TitulationDTO titulationDTO, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public List<Club> getAllClubs(Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public Club getClub(Long id, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public Club createClub(Club club, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public void modifyClub(Long id, Club club, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
+
+    public void deleteClub(Long id, Exception e){
+        throw new RuntimeException(e.getMessage());
+    }
 }
