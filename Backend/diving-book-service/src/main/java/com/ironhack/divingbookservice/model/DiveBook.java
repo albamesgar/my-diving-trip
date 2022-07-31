@@ -11,7 +11,7 @@ public class DiveBook {
     private Long id;
     private Long userId;
 
-    @OneToMany(mappedBy = "diveBook")
+    @OneToMany(mappedBy = "diveBook", fetch = FetchType.EAGER)
     private List<Dive> dives = new ArrayList<>();
 
     //Constructors

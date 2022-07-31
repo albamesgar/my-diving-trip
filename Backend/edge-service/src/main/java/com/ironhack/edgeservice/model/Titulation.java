@@ -1,10 +1,14 @@
 package com.ironhack.edgeservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
 
+@Getter
+@Setter
 public class Titulation {
     @Id
     @GeneratedValue
@@ -31,64 +35,6 @@ public class Titulation {
         this.dateObtained = dateObtained;
         this.instructorName = instructorName;
         this.clubId = clubId;
-        this.passport = passport;
-    }
-
-    //Getters and Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(String organization) {
-        this.organization = organization;
-    }
-
-    public String getTitleName() {
-        return titleName;
-    }
-
-    public void setTitleName(String titleName) {
-        this.titleName = titleName;
-    }
-
-    public Date getDateObtained() {
-        return dateObtained;
-    }
-
-    public void setDateObtained(Date dateObtained) {
-        this.dateObtained = dateObtained;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
-
-    public Long getClubId() {
-        return clubId;
-    }
-
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
-    }
-
-    public Passport getPassport() {
-        return passport;
-    }
-
-    public void setPassport(Passport passport) {
         this.passport = passport;
     }
 }

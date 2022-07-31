@@ -11,7 +11,7 @@ public class Passport {
     private Long id;
     private Long userId;
 
-    @OneToMany(mappedBy = "passport")
+    @OneToMany(mappedBy = "passport", fetch = FetchType.EAGER)
     private List<Titulation> titulations = new ArrayList<>();
 
     //Constructors

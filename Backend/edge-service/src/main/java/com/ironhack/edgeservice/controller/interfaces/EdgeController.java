@@ -19,7 +19,7 @@ public interface EdgeController {
 
     //Dive Book
     DiveBook getDiveBook(Long id);
-    Dive addDiveToDiveBook(Long id, DiveDTO diveDTO) throws IOException;
+    Dive addDiveToDiveBook(Long id, DiveDTO diveDTO);
     void modifyDiveToDiveBook(Long id, DiveDTO diveDTO);
     String validateDive(Long id);
     String cancelDiveValidation(Long id);

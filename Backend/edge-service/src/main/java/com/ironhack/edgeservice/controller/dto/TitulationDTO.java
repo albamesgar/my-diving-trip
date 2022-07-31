@@ -1,7 +1,13 @@
 package com.ironhack.edgeservice.controller.dto;
 
-import java.sql.Date;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.sql.Date;
+import java.util.Objects;
+
+@Getter
+@Setter
 public class TitulationDTO {
     private String organization;
     private String titleName;
@@ -22,45 +28,16 @@ public class TitulationDTO {
         this.clubId = clubId;
     }
 
-    //Getters and Setters
-
-    public String getOrganization() {
-        return organization;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TitulationDTO that = (TitulationDTO) o;
+        return organization.equals(that.organization) && titleName.equals(that.titleName) && dateObtained.equals(that.dateObtained) && instructorName.equals(that.instructorName) && clubId.equals(that.clubId);
     }
 
-    public void setOrganization(String organization) {
-        this.organization = organization;
-    }
-
-    public String getTitleName() {
-        return titleName;
-    }
-
-    public void setTitleName(String titleName) {
-        this.titleName = titleName;
-    }
-
-    public Date getDateObtained() {
-        return dateObtained;
-    }
-
-    public void setDateObtained(Date dateObtained) {
-        this.dateObtained = dateObtained;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
-
-    public Long getClubId() {
-        return clubId;
-    }
-
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
+    @Override
+    public int hashCode() {
+        return Objects.hash(organization, titleName, dateObtained, instructorName, clubId);
     }
 }

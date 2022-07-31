@@ -16,7 +16,7 @@ public interface EdgeService {
     void deleteUser(Long id);
 
     DiveBook getDiveBook(Long userId);
-    Dive addDiveToDiveBook(Long userId, DiveDTO diveDTO) throws IOException;
+    Dive addDiveToDiveBook(Long userId, DiveDTO diveDTO);
     void modifyDiveToDiveBook(Long diveId, DiveDTO diveDTO);
     String validateDive(Long id);
     String cancelDiveValidation(Long id);

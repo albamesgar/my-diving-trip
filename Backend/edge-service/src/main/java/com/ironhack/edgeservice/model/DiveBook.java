@@ -1,9 +1,15 @@
 package com.ironhack.edgeservice.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+@Getter
+@Setter
 public class DiveBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,29 +28,16 @@ public class DiveBook {
         this.userId = userId;
     }
 
-    //Getters and Setters
-
-    public Long getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DiveBook diveBook = (DiveBook) o;
+        return userId.equals(diveBook.userId) && dives.equals(diveBook.dives);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public List<Dive> getDives() {
-        return dives;
-    }
-
-    public void setDives(List<Dive> dives) {
-        this.dives = dives;
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, dives);
     }
 }

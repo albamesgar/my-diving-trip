@@ -1,10 +1,16 @@
 package com.ironhack.edgeservice.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
+@Getter
+@Setter
 public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,85 +42,19 @@ public class Club {
         this.rating = rating;
     }
 
-    //Getters and Setters
-
-    public Long getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Club club = (Club) o;
+        return homeNumber == club.homeNumber && postalCode == club.postalCode &&
+                Double.compare(club.rating, rating) == 0 && name.equals(club.name) &&
+                street.equals(club.street) && city.equals(club.city) && contactPhone.equals(club.contactPhone) &&
+                country.equals(club.country) && email.equals(club.email);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public int getHomeNumber() {
-        return homeNumber;
-    }
-
-    public void setHomeNumber(int homeNumber) {
-        this.homeNumber = homeNumber;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public int getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(int postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public Long getContactPhone() {
-        return contactPhone;
-    }
-
-    public void setContactPhone(Long contactPhone) {
-        this.contactPhone = contactPhone;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, street, homeNumber, city, postalCode, contactPhone, country, email, rating);
     }
 }

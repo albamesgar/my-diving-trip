@@ -1,8 +1,14 @@
 package com.ironhack.edgeservice.controller.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.Objects;
 
+@Getter
+@Setter
 public class DiveDTO {
     @NotNull
     private Date date;
@@ -59,149 +65,27 @@ public class DiveDTO {
         this.clubValidation = clubValidation;
     }
 
-    //Getters and setters
-
-    public Date getDate() {
-        return date;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DiveDTO diveDTO = (DiveDTO) o;
+        return Double.compare(diveDTO.maxDepth, maxDepth) == 0 && minutesIn == diveDTO.minutesIn &&
+                airEntering == diveDTO.airEntering && airOutgoing == diveDTO.airOutgoing &&
+                Double.compare(diveDTO.temperature, temperature) == 0 &&
+                Double.compare(diveDTO.visibility, visibility) == 0 && oxygenProportion == diveDTO.oxygenProportion &&
+                rating == diveDTO.rating && clubValidation == diveDTO.clubValidation && date.equals(diveDTO.date) &&
+                location.equals(diveDTO.location) && partnerName.equals(diveDTO.partnerName) &&
+                partnerTitulation.equals(diveDTO.partnerTitulation) &&
+                Objects.equals(bottleCapacity, diveDTO.bottleCapacity) && Objects.equals(airType, diveDTO.airType) &&
+                Objects.equals(clubId, diveDTO.clubId) && Objects.equals(picture, diveDTO.picture) &&
+                Objects.equals(observations, diveDTO.observations);
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public double getMaxDepth() {
-        return maxDepth;
-    }
-
-    public void setMaxDepth(double maxDepth) {
-        this.maxDepth = maxDepth;
-    }
-
-    public int getMinutesIn() {
-        return minutesIn;
-    }
-
-    public void setMinutesIn(int minutesIn) {
-        this.minutesIn = minutesIn;
-    }
-
-    public String getPartnerName() {
-        return partnerName;
-    }
-
-    public void setPartnerName(String partnerName) {
-        this.partnerName = partnerName;
-    }
-
-    public String getPartnerTitulation() {
-        return partnerTitulation;
-    }
-
-    public void setPartnerTitulation(String partnerTitulation) {
-        this.partnerTitulation = partnerTitulation;
-    }
-
-    public int getAirEntering() {
-        return airEntering;
-    }
-
-    public void setAirEntering(int airEntering) {
-        this.airEntering = airEntering;
-    }
-
-    public int getAirOutgoing() {
-        return airOutgoing;
-    }
-
-    public void setAirOutgoing(int airOutgoing) {
-        this.airOutgoing = airOutgoing;
-    }
-
-    public double getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
-    public double getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(double visibility) {
-        this.visibility = visibility;
-    }
-
-    public String getBottleCapacity() {
-        return bottleCapacity;
-    }
-
-    public void setBottleCapacity(String bottleCapacity) {
-        this.bottleCapacity = bottleCapacity;
-    }
-
-    public String getAirType() {
-        return airType;
-    }
-
-    public void setAirType(String airType) {
-        this.airType = airType;
-    }
-
-    public int getOxygenProportion() {
-        return oxygenProportion;
-    }
-
-    public void setOxygenProportion(int oxygenProportion) {
-        this.oxygenProportion = oxygenProportion;
-    }
-
-    public Long getClubId() {
-        return clubId;
-    }
-
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
-    public String getObservations() {
-        return observations;
-    }
-
-    public void setObservations(String observations) {
-        this.observations = observations;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public boolean isClubValidation() {
-        return clubValidation;
-    }
-
-    public void setClubValidation(boolean clubValidation) {
-        this.clubValidation = clubValidation;
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, location, maxDepth, minutesIn, partnerName, partnerTitulation,
+                airEntering, airOutgoing, temperature, visibility, bottleCapacity, airType, oxygenProportion,
+                clubId, picture, observations, rating, clubValidation);
     }
 }

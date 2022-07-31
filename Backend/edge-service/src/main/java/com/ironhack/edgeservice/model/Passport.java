@@ -1,9 +1,15 @@
 package com.ironhack.edgeservice.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+@Getter
+@Setter
 public class Passport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,29 +28,16 @@ public class Passport {
         this.userId = userId;
     }
 
-    //Getters and Setters
-
-    public Long getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Passport passport = (Passport) o;
+        return userId.equals(passport.userId) && titulations.equals(passport.titulations);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public List<Titulation> getTitulations() {
-        return titulations;
-    }
-
-    public void setTitulations(List<Titulation> titulations) {
-        this.titulations = titulations;
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, titulations);
     }
 }

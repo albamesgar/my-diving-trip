@@ -81,7 +81,7 @@ public class EdgeControllerImpl implements EdgeController {
 
     @PostMapping("/add-dive/dive-book/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Dive addDiveToDiveBook(@PathVariable Long userId, @RequestBody DiveDTO diveDTO) throws IOException {
+    public Dive addDiveToDiveBook(@PathVariable Long userId, @RequestBody DiveDTO diveDTO) {
         return edgeService.addDiveToDiveBook(userId, diveDTO);
     }
 

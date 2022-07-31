@@ -103,7 +103,7 @@ public class EdgeServiceImpl implements EdgeService {
     }
 
     @CircuitBreaker(name = "addDiveToDiveBook", fallbackMethod = "addDiveToDiveBookFallback" )
-    public Dive addDiveToDiveBook(Long userId, DiveDTO diveDTO) throws IOException {
+    public Dive addDiveToDiveBook(Long userId, DiveDTO diveDTO) {
         User user = userRepository.findById(userId).orElseThrow( () ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
         Dive dive =  bookClient.addDiveToDiveBook(userId,diveDTO);
@@ -130,7 +130,7 @@ public class EdgeServiceImpl implements EdgeService {
                 System.out.println(response.getBody());
                 System.out.println(response.getHeaders());
             } catch (IOException ex) {
-                throw ex;
+                throw new IllegalStateException();
             }
         }
         return dive;
@@ -238,51 +238,51 @@ public class EdgeServiceImpl implements EdgeService {
         throw new RuntimeException(e.getMessage());
     }
 
-    public Dive addDiveToDiveBook(Long userId, DiveDTO diveDTO, Exception e){
+    public Dive addDiveToDiveBookFallback(Long userId, DiveDTO diveDTO, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public void modifyDiveToDiveBook(Long diveId, DiveDTO diveDTO, Exception e){
+    public void modifyDiveToDiveBookFallback(Long diveId, DiveDTO diveDTO, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public String validateDive(Long id, Exception e){
+    public String validateDiveFallback(Long id, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public String cancelDiveValidation(Long id, Exception e){
+    public String cancelDiveValidationFallback(Long id, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public Passport getPassport(Long userId, Exception e){
+    public Passport getPassportFallback(Long userId, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public Titulation addTitulation(Long userId, TitulationDTO titulationDTO, Exception e){
+    public Titulation addTitulationFallback(Long userId, TitulationDTO titulationDTO, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public void modifyTitulation(Long titulationId, TitulationDTO titulationDTO, Exception e){
+    public void modifyTitulationFallback(Long titulationId, TitulationDTO titulationDTO, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public List<Club> getAllClubs(Exception e){
+    public List<Club> getAllClubsFallback(Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public Club getClub(Long id, Exception e){
+    public Club getClubFallback(Long id, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public Club createClub(Club club, Exception e){
+    public Club createClubFallback(Club club, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public void modifyClub(Long id, Club club, Exception e){
+    public void modifyClubFallback(Long id, Club club, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 
-    public void deleteClub(Long id, Exception e){
+    public void deleteClubFallback(Long id, Exception e){
         throw new RuntimeException(e.getMessage());
     }
 }
